@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="homepage.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body class="container">
+  you are writing blog as <%=username%>
+<script>
+  //let User=await import('./model/User')
+    async function postblog(event) {
+       // var users=require('./app.js')
+        //var ct=require('./app.js')
+        event.preventDefault()
+        
+        const title=document.getElementById("post-title").value;
+        const content=document.getElementById("post-body").value;
+        const result=await fetch('/save-post',{
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify({
+                        
+                        title,content
+                    })
+                }).then((res)=>res.json())
+                if(result.status==='ok'){
+                alert('successfully posted')
+                //location.href="http://localhost:100/login"
+                 //user=1;
+               }else{
+                  
+                  {alert(result.error)}
+                }
+    }
+</script>
+
+
+        <form  style="margin-top: 100px;">
+         
+            <div class="form-group">
+              <label for="post-title" class="text-muted mb-1"><small>Title</small></label>
+              <input required name="title" id="post-title" class="form-control form-control-lg form-control-title" type="text" placeholder="" autocomplete="off">
+            </div>
+      
+            <div class="form-group">
+              <label for="post-body" class="text-muted mb-1"><small>Body Content</small></label>
+              <textarea required name="body" id="post-body" class="body-content tall-textarea form-control" type="text" rows="8" cols="50"></textarea>
+            </div>
+            
+            
+      
+            <button class="btn btn-primary" type="submit" id="save_post">Save New Post</button>
+          </form>
+          <script>
+            document.getElementById("save_post").onclick=function (){
+                 
+                   event.preventDefault()
+                   postblog(event)
+                   console.log('success')
+                   location.href="http://localhost:100/profile"
+                   //alert('hello')
+                  }
+            </script>
+    
+    
+
+
+
+
+</body>
+</html>

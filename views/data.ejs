@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Bloggy</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="homepage.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+	<script type="text/javascript" src='js/main.js'></script>
+        <nav class="navbar navbar-expand-lg fixed-top ">  
+            <a class="navbar-brand" href="#" >Bloggy</a>
+            
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
+            <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse " id="navbarSupportedContent">     <ul class="navbar-nav mr-4">
+            <!--<button class="chat" type="button" style="margin-right: 5px;border: none;background-color: #171717;"><i class="bi bi-person-circle" style="color: white;"></i></button>   
+            <button class="chat" type="button" style="margin-right: 5px;border: none;background-color: #171717;"><i class="bi bi-chat-fill" style="color: white;"></i></button>
+                <button class="search" type="button" style="margin-right: 15px;border: none;background-color: #171717;"><i class="bi bi-search" style="color: white;"></i></button>
+               <button class="signin" type="submit" style="margin-left: 350px;" onclick="location.href='http://localhost:100/'">Register</button>-->
+               <button class="btn btn-success" type="submit" style="margin-left: 800px;" onclick="location.href='/logout'">Logout</button>
+           </ul> 
+        </nav>  
+	<div class="col-md-4 col-md-offset-4 form-card" style="margin-top: 100px;">
+		<div>
+			<p><b>Profile Details</b></p>
+		</div>
+		<div>
+			<center>
+				<!--<form method="POST" action="/upload" enctype="multipart/form-data">
+					<div>
+						<label>Upload profile picture</label>
+						<input type="file" name="profile-file" required/>
+					</div>
+					<div>
+						<input type="submit" value="Upload" />
+					</div>
+				</form>-->
+				<table class="table table-hover text-center">
+					<tr>
+						<td>Name </td>
+						<td>
+							<%= name %>
+						</td>
+					</tr>
+					<tr>
+						<td>Email </td>
+						<td>
+							<%= email %>
+						</td>
+					</tr>
+				
+					<tr>
+						<td><p><b>blogs written by you:</b></p></td>
+					    <% if(blogs.length > 0){ %>
+							<% blogs.forEach(function(blog) { %>
+								<tr>
+									<td>title:</td>
+									<td><%=blog.title%></td>
+									<td><a href="/myblog/<%=blog._id%>"><i class="fa fa-eye"></i></a></td>
+									<td><a href="/myblog/<%=blog._id%>/edit"><i class="fa fa-edit"></i></a></td>
+									<td><a href="/myblog/<%=blog._id%>/delete"><i class="fa fa-trash"></i></a></td>
+									<td>Likes</td>
+									<td><%=blog.like%></td>
+								</tr>
+							<% }); %>
+						<% } else{ %>  
+							<p><b>No blogs created</b></p>
+						<% } %>
+					</tr>
+				
+				
+				</table>
+			</center>
+		</div>
+		<div class="abc" id="LangTable">
+			<a href="/logout">Logout</a>
+			<p></p>
+			<a href="/create-post">create post</a>
+			<p></p>
+			<a href="/forgetpass">Change password</a>
+			<p></p>
+			<form action="/search-user" method="post">
+				<label for="username">Search user by username:</label>
+				<input type="text" id="username" name="username" required>
+				<input type="submit" class="btn btn-success" value="find">
+			  </form>
+			
+		</div>
+	</div>
+	<%-include('footer')%>
+</body>
+
+</html>
