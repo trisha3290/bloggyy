@@ -8,7 +8,7 @@ const flash=require('connect-flash')
 
 router.use(flash())
 router.get('/', (req, res, next) => {
-	return res.render('index.ejs');
+	return res.render('index');
 });
 var person
 let salt=bcrypt.genSaltSync(10)
@@ -65,7 +65,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/login', (req, res, next) => {
-	return res.render('login.ejs');
+	return res.render('login');
 });
 var is_logged_in=false
 var email_check
@@ -117,7 +117,7 @@ router.get('/profile', (req, res, next) => {
 				for(let i=0;i<=blogs.length;++i){
 					//console.log(docs[i].like)
 				}
-				return res.render('data.ejs', { name: data.username, email: data.email, blogs:docs });
+				return res.render('data', { name: data.username, email: data.email, blogs:docs });
 				//console.log(docs)
 				//.catch(error => {
 				//	console.log(error);
@@ -147,7 +147,7 @@ router.get('/logout', (req, res, next) => {
 });
 router.get('/forgetpass', (req, res, next) => {
 	if(is_logged_in)
-	{res.render("forget.ejs")}
+	{res.render("forget")}
 	else{
 		res.redirect('/')
 	};
@@ -185,7 +185,7 @@ router.get('/create-post',function(req,res){
 		if (!data) {
 			res.redirect('/');
 		} else {
-			return res.render('create-post.ejs', { "username": data.username, "email": data.email });
+			return res.render('create-post', { "username": data.username, "email": data.email });
 		}
 	});}
 	else{
@@ -212,7 +212,7 @@ router.post('/save-post', (req, res) => {
 router.get('/myblog/:id',(req,res)=>{
 	if(is_logged_in)
 	{Post.findById(req.params.id).then((post)=>{
-	res.render('single-post-screen.ejs',{title:post.title,username:post.author,content:post.content,post:post})})}
+	res.render('single-post-screen',{title:post.title,username:post.author,content:post.content,post:post})})}
 	else{
 		res.redirect('/')
 	}
@@ -250,7 +250,7 @@ router.post('/myblog/:id/edit',(req,res)=>{
 			console.log(blog.body)
 			
 		})
-		res.render('edit-post.ejs',{post:post})
+		res.render('edit-post',{post:post})
 	})}
 	else{
 		res.redirect('/')
@@ -268,7 +268,7 @@ router.post('/search-user',(req,res)=>{
 				errors.push("No such user exists")
 				//alert("user does not exists")
 				var success=[]
-				return res.render('flash.ejs',{errors:errors,success:success})
+				return res.render('flash',{errors:errors,success:success})
 		}
 		else{
 		Post.find({author:name}).then((docs)=>{
@@ -277,7 +277,7 @@ router.post('/search-user',(req,res)=>{
 				//errors.push("No such user exists")
 				//alert("user does not exists")
 				//var success=[]
-				return res.render('profile-followers.ejs',{name:name,blogs:docs})
+				return res.render('profile-followers',{name:name,blogs:docs})
 		}
 	})	
 	}
