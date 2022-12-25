@@ -1,5 +1,3 @@
-const dotenv = require('dotenv');
-dotenv.config();
 const express=require('express');
 const app=express();
 app.set('view engine', 'ejs'); 
@@ -11,15 +9,18 @@ const session = require('express-session')
 const MongoStore =  require('connect-mongo')
 var path=require('path')
 //const client = require('./db');
+const dotenv = require('dotenv');
+dotenv.config();
 const dbURI=process.env.MONG_URL
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-const db = mongoose.connection;
 mongoose.connect(dbURI,{useNewUrlParser: true, useUnifiedTopology:true},function(err){
 	if(err) return console.error(err)
 	console.log('connected to database');
 	
   })
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+const db = mongoose.connection;
+
 app.use(session({
   secret: 'work hard',
   resave: true,
