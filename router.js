@@ -5,12 +5,7 @@ const Post = require('./model/Post');
 const mongoose=require('mongoose')
 const bcrypt=require('bcryptjs')
 const flash=require('connect-flash')
-const dbURI="mongodb+srv://trisha3290:test1234@nodetuts.pyeh1.mongodb.net/node-tuts?retryWrites=true&w=majority"
-mongoose.connect(dbURI,{useNewUrlParser: true, useUnifiedTopology:true},function(err){
-	if(err) return console.error(err)
-	console.log('connected to database');
-	
-  })
+
 router.use(flash())
 router.get('/', (req, res, next) => {
 	return res.render('index.ejs');
