@@ -15,6 +15,11 @@ const dbURI=process.env.MONG_URL
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 const db = mongoose.connection;
+mongoose.connect(dbURI,{useNewUrlParser: true, useUnifiedTopology:true},function(err){
+	if(err) return console.error(err)
+	console.log('connected to database');
+	
+  })
 app.use(session({
   secret: 'work hard',
   resave: true,
