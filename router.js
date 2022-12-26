@@ -196,7 +196,8 @@ router.post('/save-post', (req, res) => {
 	let blog=req.body
 	//req.body.author=req.user._id
 	//console.log(blog.author)
-	User.findOne({ unique_id: req.session.userId }, (err, data) => {
+	if(is_logged_in)
+	{User.findOne({ unique_id: req.session.userId }, (err, data) => {
 		if (!data) {
 			res.redirect('/');
 		} else {
@@ -207,7 +208,10 @@ router.post('/save-post', (req, res) => {
 				res.redirect('/')
 			})
 		}
-	});
+	});}
+	else{
+		res.redirect('/')
+	}
 });
 router.get('/myblog/:id',(req,res)=>{
 	if(is_logged_in)
