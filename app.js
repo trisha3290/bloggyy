@@ -9,6 +9,7 @@ const mongoose=require('mongoose')
 const session = require('express-session')
 const MongoStore =  require('connect-mongo')
 var path=require('path')
+app.set('views', path.join(__dirname, 'views'));
 //const client = require('./db');
 const dotenv = require('dotenv');
 dotenv.config();
