@@ -100,6 +100,8 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/profile', (req, res, next) => {
+	is_logged_in=req.session.userId
+	console.log(is_logged_in)
 	if(is_logged_in)
 	{User.findOne({ unique_id: req.session.userId }, (err, data) => {
 		if (!data) {
@@ -146,6 +148,8 @@ router.get('/logout', (req, res, next) => {
 	}
 });
 router.get('/forgetpass', (req, res, next) => {
+	is_logged_in=req.session.userId
+	console.log(is_logged_in)
 	if(is_logged_in)
 	{res.render("forget")}
 	else{
@@ -180,6 +184,8 @@ router.post('/forgetpass', (req, res, next) => {
 
 });
 router.get('/create-post',function(req,res){
+  is_logged_in=req.session.userId
+	console.log(is_logged_in)
   if(is_logged_in)
   {User.findOne({ unique_id: req.session.userId }, (err, data) => {
 		if (!data) {
@@ -196,6 +202,8 @@ router.post('/save-post', (req, res) => {
 	let blog=req.body
 	//req.body.author=req.user._id
 	//console.log(blog.author)
+	is_logged_in=req.session.userId
+	console.log(is_logged_in)
 	if(is_logged_in)
 	{User.findOne({ unique_id: req.session.userId }, (err, data) => {
 		if (!data) {
@@ -214,6 +222,8 @@ router.post('/save-post', (req, res) => {
 	}
 });
 router.get('/myblog/:id',(req,res)=>{
+	is_logged_in=req.session.userId
+	console.log(is_logged_in)
 	if(is_logged_in)
 	{Post.findById(req.params.id).then((post)=>{
 	res.render('single-post-screen',{title:post.title,username:post.author,content:post.content,post:post})})}
@@ -222,6 +232,8 @@ router.get('/myblog/:id',(req,res)=>{
 	}
 })
 router.get('/myblog/:id/delete',(req,res)=>{
+	is_logged_in=req.session.userId
+	console.log(is_logged_in)
 	if(is_logged_in)
 	{const id=req.params.id
 	Post.findByIdAndRemove(id).then((post)=>{
@@ -231,6 +243,8 @@ router.get('/myblog/:id/delete',(req,res)=>{
 	}
 })
 router.get('/myblog/:id/edit',(req,res)=>{
+	is_logged_in=req.session.userId
+	console.log(is_logged_in)
 	if(is_logged_in)
 	{const id=req.params.id
 	let blog=req.body
@@ -242,6 +256,8 @@ router.get('/myblog/:id/edit',(req,res)=>{
 	}
 })
 router.post('/myblog/:id/edit',(req,res)=>{
+	is_logged_in=req.session.userId
+	console.log(is_logged_in)
 	if(is_logged_in)
 	{const id=req.params.id
 	let blog=req.body
@@ -261,6 +277,8 @@ router.post('/myblog/:id/edit',(req,res)=>{
 	}
 })
 router.post('/search-user',(req,res)=>{
+	is_logged_in=req.session.userId
+	console.log(is_logged_in)
 	if(is_logged_in)
 	{let name=req.body.username
 	console.log(name)
