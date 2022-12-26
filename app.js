@@ -2,7 +2,7 @@ const express=require('express');
 const app=express();
 app.set('view engine', 'ejs'); 
 app.set('views','views');
-app.use(express.static('public'));// includes css files and js files which are embedded in html 
+app.use(express.static('/public'));// includes css files and js files which are embedded in html 
 app.use(express.json());
 const bodyParser=require('body-parser')
 const mongoose=require('mongoose')
