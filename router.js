@@ -212,8 +212,8 @@ router.post('/save-post', (req, res) => {
 			
 			person=data.username
 			console.log(person)
-			Post.create({title:blog.title,content:blog.content,author: person,like:0}, (error, post) => {
-				res.redirect('/')
+			Post.create({title:blog.title,content:blog.body,author: person,like:0}, (error, post) => {
+				res.redirect('/profile')
 			})
 		}
 	});}
